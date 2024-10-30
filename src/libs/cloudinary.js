@@ -26,7 +26,7 @@ cloudinary.uploader.upload
 const upload = multer({ storage: storage }); */
 
 const corsOptions = {
-  origin: ["https://reactaap.vercel.app", "http://localhost:3000"], 
+  origin: ["https://server-triton.vercel.app/", "http://localhost:3000"], 
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 };
 

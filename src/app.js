@@ -22,8 +22,9 @@ app.use(cors({
       'http://localhost:3000',
       'https://boliviandcode.vercel.app',
       'https://reactaap.vercel.app',
-      'https://node-alfa.vercel.app' 
-
+      'https://node-alfa.vercel.app', 
+      'https://server-triton.vercel.app',
+      'https://triton-blue.vercel.app'
     ]
 
     if (ACCEPTED_ORIGINS.includes(origin)) {

@@ -2,11 +2,25 @@ import { uploadImage, uploadProspecto } from "../libs/cloudinary.js";
 import { pool } from "../db.js";
 import fs from "fs-extra";
 
-export const getProductosPorNombre =async (req, res) => {
+export const getProductosPorNombre = async (req, res) => {
   try {
+    const { name } = req.query; // Obtiene el parámetro 'name' de la query
+
+    if (!name) {
+      return res.status(400).json({ error: 'El parámetro "name" es obligatorio.' });
+    }
+
+    // Ejecuta la consulta con el parámetro 'name' rodeado de '%' para buscar productos con el mismo nombre
     const [result] = await pool.query(
-      "SELECT * FROM products  WHERE name LIKE ?"
+      "SELECT * FROM products WHERE name LIKE ?", 
+      [`%${name}%`] // Pasa el nombre con '%' alrededor
     );
+
+    if (result.length === 0) {
+      return res.status(404).json({ message: 'No se encontraron productos con ese nombre.' });
+    }
+
+    // Devuelve los productos encontrados
     res.json(result);
   } catch (error) {
     return res.status(500).json({ message: error.message });

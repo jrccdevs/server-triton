@@ -14,7 +14,7 @@ const router = Router();
 router.get("/productos", getProductosTriton);
 router.get("/productos/:id", getProductosTritonId);
 router.get("/categorias/:name", getProductosCategoria);
-router.get("/producto", getProductosPorNombre);
+router.get("/name", getProductosPorNombre);
 // router.get("/forma", getForma);
 
 //router.get("/formaFarmaceutica", getFormaFarma);

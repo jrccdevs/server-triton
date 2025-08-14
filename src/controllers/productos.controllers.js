@@ -169,3 +169,40 @@ export const getProductosCategoria = async (req, res) => {
     }
   };
 
+  export const updateStock = async (req, res) => {
+    const { id } = req.params;
+    const { cantidadVendida } = req.body;
+  
+    if (!cantidadVendida || cantidadVendida <= 0) {
+      return res.status(400).json({ message: 'Cantidad inválida' });
+    }
+  
+    try {
+      // 1️⃣ Obtener stock actual
+      const [rows] = await pool.query(
+        'SELECT cantidad FROM products WHERE product_id = ?',
+        [id]
+      );
+  
+      if (rows.length === 0) {
+        return res.status(404).json({ message: 'Producto no encontrado' });
+      }
+  
+      const stockActual = rows[0].cantidad;
+  
+      // 2️⃣ Validar stock suficiente
+      if (cantidadVendida > stockActual) {
+        return res.status(400).json({ message: 'Stock insuficiente' });
+      }
+  
+      // 3️⃣ Actualizar stock
+      await pool.query(
+        'UPDATE products SET cantidad = cantidad - ? WHERE product_id = ?',
+        [cantidadVendida, id]
+      );
+  
+      res.json({ message: 'Stock actualizado correctamente' });
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  };

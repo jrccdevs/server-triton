@@ -3,7 +3,8 @@ import {
     getProductosTriton,
     getProductosTritonId,
     getProductosCategoria,
-    getProductosPorNombre
+    getProductosPorNombre,
+    updateStock
   
   } from "../controllers/productos.controllers.js";
  // import {authenticacion} from '../controllers/authenticacion.controllers.js'
@@ -19,7 +20,8 @@ router.get("/name", getProductosPorNombre);
 
 //router.get("/formaFarmaceutica", getFormaFarma);
 //router.get("/formaFarmaceutica/:categoria", getProductosCate);
-
+// PATCH para actualizar stock
+router.patch('/:id/stock', updateStock);
 
 
 

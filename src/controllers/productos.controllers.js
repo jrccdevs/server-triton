@@ -52,6 +52,7 @@ export const getProductosTritonId = async (req, res) => {
         p.price,
         p.main_image,
         p.description,
+        p.cantidad,
         
         -- Imágenes del producto por color
         GROUP_CONCAT(DISTINCT CONCAT(pi.color, '|', pi.image_url, '|', pi.caracteristicas) SEPARATOR '~') AS product_images,

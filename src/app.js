@@ -3,7 +3,7 @@ import fileUpload from "express-fileupload";
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser';
 import path from "path";
-
+import facturaRoutes from "./routes/facturaRoutes.js";
 import './config.js'
 import indexRoutes from './routes/index.routes.js'
 //import productosRoutesId from './routes/index.routes.js'
@@ -59,6 +59,6 @@ app.use(productosRoutes);
 app.use(contactosRoutes);
 app.use(tarjetaRoutes)
 app.use(paymentRoutes);
-
+app.use("/api/facturas", facturaRoutes);
 //app.use(express.static(join(__dirname, '../client/dist')))
 export default app

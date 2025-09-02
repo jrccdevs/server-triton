@@ -3,44 +3,31 @@ import { pool } from "../db.js"; // Importa la conexión a la base de datos
 // Crear un contacto
 export const createContacto = async (req, res) => {
   try {
-    const {
-      nombre,
-      apellido,
-      correo,
-      telefono,
-      metodo_pago,
-      
-    } = req.body;
+    const { nombre, apellido, correo, telefono, metodo_pago, ci } = req.body; // 👈 agregamos ci
 
-    
-    //const {imagen} = image;
+    if (!nombre || !apellido || !correo || !telefono || !ci) {
+      return res.status(400).json({ message: "Faltan datos obligatorios" });
+    }
+
     const [resultado] = await pool.query(
-      "INSERT INTO contactos(nombre, apellido, correo, telefono,metodo_pago) VALUES (?, ?, ?, ?, ?)",
-      [
-        nombre,
-      apellido,
-      correo,
-      telefono,
-      metodo_pago,
-      ]
+      "INSERT INTO contactos(nombre, apellido, correo, telefono, metodo_pago, ci) VALUES (?, ?, ?, ?, ?, ?)",
+      [nombre, apellido, correo, telefono, metodo_pago, ci] // 👈 insertamos ci
     );
 
-    console.log(resultado);
-
-    res.json({
+    res.status(201).json({
       id: resultado.insertId,
       nombre,
       apellido,
       correo,
       telefono,
       metodo_pago,
+      ci
     });
   } catch (error) {
-    console.log(error);
+    console.log("Error creando contacto:", error);
     return res.status(500).json({ message: error.message });
   }
 };
-
 
 
 

@@ -10,7 +10,7 @@ export const crearFactura = async (req, res) => {
     if (!contacto || !cart || cart.length === 0) {
       return res.status(400).json({ message: "Datos incompletos para generar factura" });
     }
-
+    console.log("Datos recibidos para factura:", req.body);
     // ⚠️ Usa contacto.id como contacto_id
     const [result] = await pool.query(
       "INSERT INTO facturas (contacto_id, total, metodo_pago, productos, fecha) VALUES (?, ?, ?, ?, NOW())",

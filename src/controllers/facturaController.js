@@ -39,6 +39,8 @@ ${detalle}
 Total: $${total}
 Fecha: ${new Date().toLocaleString()}
 `;
+console.log("📩 EMAIL_USER:", process.env.EMAIL_USER);
+console.log("📩 ADMIN_EMAIL:", process.env.ADMIN_EMAIL);
 
     const transporter = nodemailer.createTransport({
       service: "gmail",

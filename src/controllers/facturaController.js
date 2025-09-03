@@ -1,3 +1,8 @@
+import { pool } from "../db.js";  // 🔹 Import correcto
+import nodemailer from "nodemailer";
+// import twilio from "twilio";
+
+
 export const crearFactura = async (req, res) => {
   try {
     const { contacto, cart, total, metodo_pago } = req.body;
